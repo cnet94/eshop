@@ -1,0 +1,57 @@
+<html xml="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List products</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>List Products</h2>
+    <hr/>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a th:href="@{/products/addEntityForm}" class="btn btn-primary mb-2">Add product</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="btn btn-primary mb-2">Sign in</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" class="btn btn-primary mb-2">Logout</a>
+            </div>
+    <table class="table table-bordered table-striped" id="employeeTable">
+        <thead>
+        <tr>
+            <th>Название продукта</th>
+            <th>Протеины</th>
+            <th>Жиры</th>
+            <th>Углеводы</th>
+            <th>Клаории</th>
+            <th>Вес</th>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <th colspan="2">Action</th>
+            </div>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td th:text="${product.title}"></td>
+            <td th:text="${product.prots}"></td>
+            <td th:text="${product.fats}"></td>
+            <td th:text="${product.carbos}"></td>
+            <td th:text="${product.kcal}"></td>
+            <td th:text="${product.weight}"></td>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td>
+                    <a th:href="@{/products/showUpdateForm(id=${product.id})}" class="btn btn-info">Update</a>
+                    <a th:href="@{/products/deleteEntity(id=${product.id})}" class="btn btn-danger ml-2">Delete</a>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.js"></script>
+</body>
+</html>
