@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Страница каталога</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/menu.css">
+</head>
+<body>
+<div th:insert="~{fragments/menu :: menu}"></div>
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Левый столбик -->
+      <div class="col-md-3 catalog-list">
+        <ul class="list-group">
+          <li class="list-group-item" onmouseover="showItems('phones')">Телефоны / Планшеты</li>
+          <li class="list-group-item" onmouseover="showItems('refrigerators')">Холодильники</li>
+          <li class="list-group-item" onmouseover="showItems('laptops')">Ноутбуки</li>
+          <li class="list-group-item" onmouseover="showItems('tvs')">Телевизоры</li>
+          <!-- Добавьте другие элементы каталога -->
+        </ul>
+      </div>
+
+      <!-- Элементы каталога -->
+      <div class="col-md-9 catalog-items">
+        <!-- Вкладка "Телефоны" -->
+        <div id="phones" class="tab-pane fade">
+          <div class="row">
+            <!--            Элемент второго менб-->
+            <div class="col-md-4">
+              <div class="card">
+                <img class="card-img-top" th:src="@{/img/phones.png}" alt="Телефоны">
+                <div class="card-body">
+                  <a th:href="@{/catalog/phones/}" class="card-title">Телефоны</a>
+                </div>
+              </div>
+            </div>
+            <!--            Элемент второго менб-->
+            <div class="col-md-4">
+              <div class="card">
+                <img class="card-img-top" th:src="@{/img/phones.png}" alt="Планшеты">
+                <div class="card-body">
+                  <a th:href="@{/products/}" class="card-title">Планшеты</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Вкладка "Холодильники" -->
+        <div id="refrigerators" class="tab-pane fade">
+          <div class="row">
+            <div class="col-md-4">
+              <!-- Добавьте элементы -->
+            </div>
+            <div class="col-md-4">
+              <!-- Добавьте элементы -->
+            </div>
+            <div class="col-md-4">
+              <!-- Добавьте элементы -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Добавьте другие вкладки -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  function showItems(tabId) {
+    $('.catalog-items .tab-pane').removeClass('show active');
+    $('#' + tabId).addClass('show active');
+  }
+</script>
+</body>
+</html>

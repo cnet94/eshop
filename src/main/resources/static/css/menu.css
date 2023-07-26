@@ -1,0 +1,12 @@
+.catalog-list {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.catalog-items {
+    padding: 20px;
+}
+
+.catalog-items .row > div {
+    margin-bottom: 20px;
+}

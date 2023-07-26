@@ -1,33 +1,45 @@
-CREATE DATABASE food777
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    CONNECTION LIMIT = -1
-    IS_TEMPLATE = False;
+-- �������� ������� Company
+CREATE TABLE companies (
+   company_id SERIAL PRIMARY KEY,
+   name VARCHAR(255) NOT NULL,
+   balance NUMERIC(10, 2) NOT NULL
+);
+
+CREATE TABLE shops (
+  shop_id SERIAL PRIMARY KEY,
+  company_id INT REFERENCES companies(company_id),
+  name VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE public.products
 (
     product_id serial,
-    title character varying NOT NULL,
-    prots numeric(6, 2),
-    fats numeric(6, 2),
-    carbos numeric(6, 2),
-    kcal integer,
-    weight integer,
+    shop_id integer REFERENCES shops(company_id),
+    category character varying(255) NOT NULL,
+    title character varying(255) NOT NULL,
+    url_img character varying(255) NOT NULL,
+    price numeric(7, 2) NOT NULL,
+    description TEXT,
     PRIMARY KEY (product_id)
 );
 
-ALTER TABLE IF EXISTS public.products
-    OWNER to postgres;
+CREATE TABLE public.cat_phones (
+    cat_phone_id serial,
+    product_id int REFERENCES public.products(product_id),
+    brand character varying(100) NOT NULL,
+    model character varying(155) NOT NULL,
+    system character varying(50) NOT NULL,
+    ram int NOT NULL,
+    memory int NOT NULL,
+    display_size numeric(5, 2) NOT NULL,
+    PRIMARY KEY (cat_phone_id)
+);
 
-INSERT INTO products (title, prots, fats, carbos, kcal, weight)
-VALUES ('Абрикос свежий', 1.2, 0.2, 14.5, 56, 100),
-       ('Греческий йогурт', 6.0, 10.0, 4.0, 150, 100),
-       ('Красная рыба', 20.0, 10.0, 0.0, 200, 100),
-       ('Овсяные хлопья', 11.0, 7.0, 65.0, 379, 100),
-       ('Салат Цезарь', 6.0, 9.0, 8.0, 135, 100),
-       ('Черешня сушеная', 2.0, 1.0, 70.0, 320, 100),
-       ('Говядина низкой жирности', 26.0, 3.0, 0.0, 130, 100),
-       ('Манго сушеное', 2.5, 0.5, 73.0, 325, 100),
-       ('Курица гриль', 23.0, 5.0, 0.0, 140, 100),
-       ('Кукурузные хлопья', 7.0, 1.0, 85.0, 379, 100);
+CREATE TABLE public.cat_tvs (
+    cat_tv_id serial,
+    product_id int REFERENCES public.products(product_id),
+    diagonal numeric(5, 2) NOT NULL,
+    smart_tv boolean,
+    PRIMARY KEY (cat_tv_id)
+);
