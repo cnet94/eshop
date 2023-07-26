@@ -1,9 +1,9 @@
-package org.turkovaleksey.eshop.repository.model.categories;
+package org.turkovaleksey.eshop.repository.model.categories.television;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.turkovaleksey.eshop.repository.model.Product;
+import org.turkovaleksey.eshop.repository.model.product.Product;
 
 import javax.persistence.*;
 

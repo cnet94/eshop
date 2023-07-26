@@ -3,7 +3,7 @@ package org.turkovaleksey.eshop.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.turkovaleksey.eshop.repository.api.ProductRepository;
-import org.turkovaleksey.eshop.repository.model.Product;
+import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.service.api._IService;
 
 import java.util.List;

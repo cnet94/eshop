@@ -1,4 +1,4 @@
-package org.turkovaleksey.eshop.repository.model;
+package org.turkovaleksey.eshop.repository.model.product;
 
 public interface ProductProjection {
     String getCategory();

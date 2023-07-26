@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.turkovaleksey.eshop.repository.model.Product;
+import org.turkovaleksey.eshop.repository.model.product.Product;
 
 import javax.persistence.*;
 

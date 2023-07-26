@@ -18,5 +18,4 @@ public class Company {
     private Integer id;
     private String name;
     private Double balance;
-
 }

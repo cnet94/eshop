@@ -2,7 +2,7 @@ package org.turkovaleksey.eshop.repository.api;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.turkovaleksey.eshop.repository.model.categories.Television;
+import org.turkovaleksey.eshop.repository.model.categories.television.Television;
 
 import java.util.List;
 

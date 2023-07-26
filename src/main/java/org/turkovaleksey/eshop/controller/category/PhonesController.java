@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.turkovaleksey.eshop.repository.model.Product;
+import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.repository.model.categories.phone.PhoneWithProductProjection;
 import org.turkovaleksey.eshop.service.impl.ServicePhoneImpl;
 
