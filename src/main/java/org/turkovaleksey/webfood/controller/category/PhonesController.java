@@ -10,8 +10,8 @@ import org.turkovaleksey.webfood.service.api.ServiceProduct;
 import java.util.List;
 
 @Controller
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/catalog/phones")
+public class PhonesController {
 
     private ServiceProduct serviceProduct;
 
@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping("/")
     public ModelAndView showProducts(){
-        ModelAndView modelAndView = new ModelAndView("list-products");
+        ModelAndView modelAndView = new ModelAndView("categories/phones");
         List<Product> allProducts = serviceProduct.getAll();
         modelAndView.addObject("products", allProducts);
         return modelAndView;

@@ -6,18 +6,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 </head>
 <body>
+<div th:insert="~{menu :: menu}"></div>
 <div class="container">
-    <h2>List Products</h2>
+    <div class="container">
+        <div class="row">
+            <div th:each="product : ${products}" class="col-md-4">
+                <div class="card mb-4">
+                    <img th:src="@{${product.urlImg}}" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${product.title}">Product Name</h5>
+                        <p class="card-text" th:text="${product.brand}">Weight</p>
+                        <p class="card-text" th:text="${product.model}">Weight</p>
+                        <p class="card-text" th:text="${product.price}">Weight</p>
+                        <!-- Другие типичные данные товара -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</div>
+    <!--
     <hr/>
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <a th:href="@{/products/addEntityForm}" class="btn btn-primary mb-2">Add product</a>
-            </div>
-            <div sec:authorize="isAnonymous()">
-                <a th:href="@{/login}" class="btn btn-primary mb-2">Sign in</a>
-            </div>
-            <div sec:authorize="isAuthenticated()">
-                <a th:href="@{/logout}" class="btn btn-primary mb-2">Logout</a>
-            </div>
     <table class="table table-bordered table-striped" id="employeeTable">
         <thead>
         <tr>
@@ -49,9 +61,10 @@
         </tr>
         </tbody>
     </table>
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.13.1/datatables.min.js"></script>
+-->
 </body>
 </html>
