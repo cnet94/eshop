@@ -30,7 +30,7 @@ public class ServicePhoneImpl implements _IService<Phone, Integer> {
 
     @Override
     public Phone getById(Integer id) {
-        return null;
+        return phoneRepository.getById(id);
     }
 
     @Override

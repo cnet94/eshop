@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.turkovaleksey.eshop.repository.model.categories.phone.Phone;
 import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.repository.model.categories.phone.PhoneWithProductProjection;
 import org.turkovaleksey.eshop.service.impl.ServicePhoneImpl;
@@ -31,12 +32,20 @@ public class PhonesController {
         return modelAndView;
     }
 
-    @GetMapping("/addEntityForm")
-    public ModelAndView addEntityForm() {
-        ModelAndView modelAndView = new ModelAndView("add-product-form");
-        modelAndView.addObject("product", new Product());
+    @GetMapping("/{id}")
+    public ModelAndView getPhoneById(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("categories/card-phone");
+        Phone phone = servicePhone.getById(id);
+        modelAndView.addObject("phone", phone);
         return modelAndView;
     }
+
+//    @PostMapping("/addEntityForm")
+//    public ModelAndView addEntityForm() {
+//        ModelAndView modelAndView = new ModelAndView("add-product-form");
+//        modelAndView.addObject("product", new Product());
+//        return modelAndView;
+//    }
 
     @PostMapping("/saveEntity")
     public String saveBrand(@ModelAttribute Product product) {
@@ -44,26 +53,19 @@ public class PhonesController {
         return "redirect:/products/";
     }
 
-    @GetMapping("/showUpdateForm")
-    public ModelAndView showUpdateForm(@RequestParam Integer id) {
-        ModelAndView modelAndView = new ModelAndView("add-product-form");
-//        Product currentProduct = serviceProduct.getById(id);
-//        modelAndView.addObject("product", currentProduct);
-        return modelAndView;
-    }
+//    @GetMapping("/showUpdateForm")
+//    public ModelAndView showUpdateForm(@RequestParam Integer id) {
+//        ModelAndView modelAndView = new ModelAndView("add-product-form");
+////        Product currentProduct = serviceProduct.getById(id);
+////        modelAndView.addObject("product", currentProduct);
+//        return modelAndView;
+//    }
 
-    @GetMapping("/deleteEntity")
+    @DeleteMapping("/deleteEntity")
     public String deleteEntity(@RequestParam Integer id) {
 //        serviceProduct.deleteById(id);
         return "redirect:/products/";
     }
-
-//    @GetMapping("/{id}")
-//    public String getPhoneById(@PathVariable Long id, Model model) {
-//        Phone phone = phoneService.getPhoneById(id);
-//        model.addAttribute("phone", phone);
-//        return "phone-details"; // Возвращает имя представления для отображения деталей телефона
-//    }
 
 
 }

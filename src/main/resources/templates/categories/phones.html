@@ -20,7 +20,7 @@
                             <p class="card-text" th:text="${phone.brand}"></p>
                             <p class="card-text" th:text="${phone.model}"></p>
                         </div>
-                        <a th:href="@{/catalog/phones/{id}(id=${phone.id})}">Просмотреть</a>
+                        <a th:href="@{'/catalog/phones/' + ${phone.id}}">Просмотреть</a>
                     </div>
                 </div>
             </div>

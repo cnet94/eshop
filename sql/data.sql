@@ -27,7 +27,6 @@ VALUES
     (4, 6.2, 'N'),
     (5, 6.2, 'Y');
 
--- ������� ������ � ������� Company
 INSERT INTO companies (name, balance) VALUES
     ('Company 1', 1000.00),
     ('Company 2', 2000.00);
