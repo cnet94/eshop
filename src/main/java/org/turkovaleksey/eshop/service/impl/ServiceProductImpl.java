@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServiceProductImpl implements _IService<Product,Integer> {
+public class ServiceProductImpl {
 
     private ProductRepository productRepository;
 
@@ -19,12 +19,10 @@ public class ServiceProductImpl implements _IService<Product,Integer> {
         this.productRepository = productRepository;
     }
 
-    @Override
     public List<Product> getAll() {
         return productRepository.findAll();
     }
 
-    @Override
     public Product getById(Integer id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
@@ -37,12 +35,10 @@ public class ServiceProductImpl implements _IService<Product,Integer> {
         }
     }
 
-    @Override
     public void saveOrUpdate(Product entity) {
         productRepository.save(entity);
     }
 
-    @Override
     public void deleteById(Integer id) {
         productRepository.deleteById(id);
     }

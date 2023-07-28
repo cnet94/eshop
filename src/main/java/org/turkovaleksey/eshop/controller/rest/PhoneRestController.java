@@ -23,7 +23,7 @@ public class PhoneRestController {
 
     @GetMapping("/a")
     public List<PhoneWithProductProjection> getAllField(){
-        return repository.findAllPhonesWithSelectedFields();
+        return repository.findAllPhonesWithProductsSelectedFields();
     }
 
 }

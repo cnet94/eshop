@@ -1,0 +1,43 @@
+body, html {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+    display: flex;
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #f1f1f1; /* Серый цвет для левой части */
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.content {
+    width: 85%;
+    padding: 20px;
+}
+
+/* Просто стилизация для примера */
+h2 {
+    margin-top: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: #666;
+}

@@ -15,6 +15,6 @@ public interface PhoneRepository extends JpaRepository<Phone, Integer> {
     List<Phone> findAllPhonesWithProducts();
 
     @Query("SELECT p.id as id, p.brand as brand, p.model as model, p.product as product FROM Phone p")
-    List<PhoneWithProductProjection> findAllPhonesWithSelectedFields();
+    List<PhoneWithProductProjection> findAllPhonesWithProductsSelectedFields();
 
 }

@@ -15,9 +15,9 @@ public class MainController {
     @GetMapping("/catalog/")
     public ModelAndView catalogPage() {return new ModelAndView("catalog"); }
 
-    @GetMapping("/test/")
-    public ModelAndView testPage() {
-        return new ModelAndView("test");
+    @GetMapping("/panel/")
+    public ModelAndView panelPage() {
+        return new ModelAndView("panel");
     }
 
 }
