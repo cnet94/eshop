@@ -20,4 +20,9 @@ public class MainController {
         return new ModelAndView("panel");
     }
 
+    @GetMapping("/test/")
+    public ModelAndView testPage() {
+        return new ModelAndView("test");
+    }
+
 }

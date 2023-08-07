@@ -1,19 +1,15 @@
 <div th:fragment="sidebar">
-  <div class="row">
-    <div class="col-md-5">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link" href="#" onclick="showMenu('menu1')">Main</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" onclick="showMenu('menu2')">Shops</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" onclick="showMenu('menu3')">Меню3</a>
-        </li>
-      </ul>
+    <div class="position-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Main</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{//}">Shops</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{//}">Content</a>
+            </li>
+        </ul>
     </div>
-    <div class="col-md-7" id="menuContent">
-    </div>
-  </div>
 </div>
