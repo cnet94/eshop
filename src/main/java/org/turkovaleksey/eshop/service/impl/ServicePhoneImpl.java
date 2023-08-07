@@ -9,10 +9,11 @@ import org.turkovaleksey.eshop.repository.model.categories.phone.PhoneWithProduc
 import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.service.api._IService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class ServicePhoneImpl implements _IService<Product, Phone, Integer> {
+public class ServicePhoneImpl implements _IService<Phone, Integer> {
 
     private final ProductRepository productRepository;
     private final PhoneRepository phoneRepository;
@@ -22,7 +23,6 @@ public class ServicePhoneImpl implements _IService<Product, Phone, Integer> {
         this.productRepository = productRepository;
         this.phoneRepository = phoneRepository;
     }
-
 
     @Override
     public List<Phone> getAll() {
@@ -43,13 +43,15 @@ public class ServicePhoneImpl implements _IService<Product, Phone, Integer> {
     }
 
     @Override
-    public void saveOrUpdate(Product product, Phone entity) {
-        entity.setProduct(product);
-        phoneRepository.save(entity);
+    @Transactional
+    public void saveOrUpdate(Phone phone) {
+        Product prodcut = phone.getProduct();
+        productRepository.save(prodcut);
+        phoneRepository.save(phone);
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        phoneRepository.deleteById(id);
     }
 }

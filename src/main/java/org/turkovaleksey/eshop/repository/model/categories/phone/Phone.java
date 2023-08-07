@@ -20,7 +20,7 @@ public class Phone {
     @Column(name = "cat_phone_id")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 

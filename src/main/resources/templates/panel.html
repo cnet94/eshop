@@ -2,10 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Panel</title>
-    <link rel="stylesheet" href="../static/css/menu.css">
-    <link rel="stylesheet" href="../static/css/sidebar.css">
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .sidebar-style {
+            height: 100vh;
+        }
+        .nav-link {
+            color: #d0d0d0;
+        }
+
+        .nav-link:hover {
+            color: #fffd11;
+        }
+
+        .nav-link:active {
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
     <div th:insert="~{fragments/menu :: menu}"></div>
@@ -16,7 +30,12 @@
                 <div th:insert="~{fragments/sidebar :: sidebar}"></div>
             </nav>
             <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                Контент
+<!--                Content-->
+                <div>
+                    <p>Phone</p>
+                    <a th:href="@{/catalog/phones/newEntityForm}" class="card-title">Add</a>
+                    <a th:href="@{/catalog/phones/quickSave}" class="card-title">Быстрый объект</a>
+                </div>
             </div>
         </div>
     </div>
