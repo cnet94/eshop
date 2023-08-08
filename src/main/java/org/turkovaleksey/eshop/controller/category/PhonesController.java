@@ -1,15 +1,30 @@
 package org.turkovaleksey.eshop.controller.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.turkovaleksey.eshop.controller.api._IController;
 import org.turkovaleksey.eshop.repository.model.categories.phone.Phone;
 import org.turkovaleksey.eshop.repository.model.categories.phone.PhoneWithProductProjection;
+import org.turkovaleksey.eshop.repository.model.photo.Photo;
 import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.service.impl.ServicePhoneImpl;
+import org.turkovaleksey.eshop.service.impl.ServicePhotoImpl;
+import org.turkovaleksey.eshop.service.impl.ServiceProductImpl;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Random;
 
@@ -19,13 +34,20 @@ import static org.turkovaleksey.eshop.Constants.*;
 @RequestMapping("/catalog/phones")
 public class PhonesController implements _IController<Phone, Integer> {
 
+    @Value("${upload.dir}")
+    private String uploadDir;
+
     private ServicePhoneImpl servicePhone;
+    private ServiceProductImpl serviceProduct;
+
+    private ServicePhotoImpl servicePhoto;
 
     @Autowired
-    public void setServicePhone(ServicePhoneImpl servicePhone) {
+    public void setService(ServicePhoneImpl servicePhone, ServiceProductImpl serviceProduct, ServicePhotoImpl servicePhoto) {
         this.servicePhone = servicePhone;
+        this.serviceProduct = serviceProduct;
+        this.servicePhoto = servicePhoto;
     }
-
 
     @Override
     @GetMapping("/")
@@ -69,7 +91,7 @@ public class PhonesController implements _IController<Phone, Integer> {
         product.setCategory("phones");
         product.setTitle("Title " + temp);
         product.setPrice(999.12);
-        product.setUrlImg("http://test.com/"+temp);
+        product.setUrlImg("http://test.com/" + temp);
         product.setDescription("Somthing test " + temp);
         Phone phone = new Phone();
         phone.setBrand("Brand " + temp);
@@ -79,6 +101,7 @@ public class PhonesController implements _IController<Phone, Integer> {
         phone.setRam(temp);
         phone.setSystem("OS");
         phone.setDisplaySize(55);
+
         servicePhone.saveOrUpdate(phone);
         return "redirect:/catalog/phones/";
     }
@@ -106,5 +129,32 @@ public class PhonesController implements _IController<Phone, Integer> {
         return modelAndView;
     }
 
+    @PostMapping("/upload")
+//    , @RequestParam("productId") Integer productId
+    public String uploadFile(@RequestParam("file") MultipartFile file, Model model) {
+        Integer productId = 14;
+        Product product = serviceProduct.getById(productId);
 
+        try {
+            Path uploadPath = Paths.get(uploadDir).toAbsolutePath();
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            // Сохраняем файл в папке загрузки
+            Path filePath = uploadPath.resolve(file.getOriginalFilename());
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Создание и сохранение объекта Photo
+            Photo photo = new Photo();
+            photo.setFilename(file.getOriginalFilename());
+            photo.setFilePath(filePath.toString());
+            photo.setProduct(product);
+            servicePhoto.saveOrUpdate(photo);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "succss";
+    }
 }

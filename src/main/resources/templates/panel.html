@@ -4,22 +4,7 @@
     <meta charset="UTF-8">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        .sidebar-style {
-            height: 100vh;
-        }
-        .nav-link {
-            color: #d0d0d0;
-        }
-
-        .nav-link:hover {
-            color: #fffd11;
-        }
-
-        .nav-link:active {
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{../static/css/sidebar.css}">
 </head>
 <body>
     <div th:insert="~{fragments/menu :: menu}"></div>
@@ -30,11 +15,14 @@
                 <div th:insert="~{fragments/sidebar :: sidebar}"></div>
             </nav>
             <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-<!--                Content-->
                 <div>
                     <p>Phone</p>
                     <a th:href="@{/catalog/phones/newEntityForm}" class="card-title">Add</a>
                     <a th:href="@{/catalog/phones/quickSave}" class="card-title">Быстрый объект</a>
+                    <form th:action="@{/catalog/phones/upload}" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept="image/*" />
+                        <button type="submit">Загрузить</button>
+                    </form>
                 </div>
             </div>
         </div>

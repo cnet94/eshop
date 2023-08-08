@@ -12,17 +12,19 @@
             <div class="row">
                 <div th:each="phone : ${phonesList}" class="col-md-4">
                     <div class="card mb-4">
-                        <img class="card-img-top" th:src="@{/img/phones.png}" alt="Телефоны">
+                        <img class="card-img-top" th:src="@{../../static/img/phones.png}" alt="Телефоны">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${phone.product.title}"></h5>
-                            <p class="card-text" th:text="${phone.id}"></p>
-                            <p class="card-text" th:text="${phone.product.category}"></p>
-                            <p class="card-text" th:text="${phone.brand}"></p>
-                            <p class="card-text" th:text="${phone.model}"></p>
+                            <a th:href="@{'/catalog/phones/' + ${phone.id}}">
+                                <h5 class="card-title" th:text="${phone.product.title}"></h5>
+                            </a>
+                            Category : <span class="card-text" th:text="${phone.product.category}"></span>
+                            <br>
+                            Brand : <span class="card-text" th:text="${phone.brand}"></span>
+                            <br>
+                            Model : <span class="card-text" th:text="${phone.model}"></span>
                         </div>
-                        <a th:href="@{'/catalog/phones/' + ${phone.id}}">Просмотреть</a>
                         <a th:href="@{/catalog/phones/showUpdateForm(id=${phone.id})}" class="btn btn-info">Update</a>
-                        <a th:href="@{/catalog/phones/delete(id=${phone.id})}" class="btn btn-danger ml-2">Delete</a>
+                        <a th:href="@{/catalog/phones/delete(id=${phone.id})}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </div>

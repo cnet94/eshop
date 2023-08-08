@@ -36,6 +36,15 @@ CREATE TABLE public.cat_phones (
     PRIMARY KEY (cat_phone_id)
 );
 
+CREATE TABLE public.photos
+(
+    photo_id serial,
+    filename character varying(255) NOT NULL,
+    file_path character varying(255) NOT NULL,
+    product_id int REFERENCES public.products(product_id),
+    PRIMARY KEY (photo_id)
+);
+
 CREATE TABLE public.cat_tvs (
     cat_tv_id serial,
     product_id int REFERENCES public.products(product_id),
