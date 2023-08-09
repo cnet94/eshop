@@ -20,7 +20,7 @@ public class Photo {
     private String filename;
     @Column(name = "file_path")
     private String filePath;
-//    @ManyToOne
-//    @JoinColumn(name = "product_id")
-//    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

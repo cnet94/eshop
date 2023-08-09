@@ -1,12 +1,9 @@
 package org.turkovaleksey.eshop.controller.rest;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 import org.turkovaleksey.eshop.repository.api.PhoneRepository;
 import org.turkovaleksey.eshop.repository.api.PhotoRepository;
 import org.turkovaleksey.eshop.repository.model.categories.phone.Phone;
@@ -15,25 +12,26 @@ import org.turkovaleksey.eshop.repository.model.photo.Photo;
 
 import java.util.List;
 
-import static org.turkovaleksey.eshop.Constants.PAGE_CARD_PHONE;
-
 @RestController
-@RequestMapping("/api/phones")
+@RequestMapping("/api/phone")
 public class PhoneRestController {
-    @Autowired
-    private PhoneRepository repository;
+    private PhoneRepository phoneRepository;
+    private PhotoRepository photoRepository;
 
     @Autowired
-    private PhotoRepository photoRepository;
+    public void setPhoneRepository(PhoneRepository phoneRepository, PhotoRepository photoRepository) {
+        this.phoneRepository = phoneRepository;
+        this.photoRepository = photoRepository;
+    }
 
     @GetMapping("/")
     public List<Phone> getAll(){
-        return repository.findAllPhonesWithProducts();
+        return phoneRepository.findAllPhonesWithProducts();
     }
 
     @GetMapping("/a")
     public List<PhoneWithProductProjection> getAllField(){
-        return repository.findAllPhonesWithProductsSelectedFields();
+        return phoneRepository.findAllPhonesWithProductsSelectedFields();
     }
 
     @GetMapping("/photos/")

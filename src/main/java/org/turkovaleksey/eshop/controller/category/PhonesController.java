@@ -132,7 +132,7 @@ public class PhonesController implements _IController<Phone, Integer> {
     @PostMapping("/upload")
 //    , @RequestParam("productId") Integer productId
     public String uploadFile(@RequestParam("file") MultipartFile file, Model model) {
-        Integer productId = 14;
+        Integer productId = 16;
         Product product = serviceProduct.getById(productId);
 
         try {

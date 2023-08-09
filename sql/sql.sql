@@ -1,4 +1,3 @@
--- �������� ������� Company
 CREATE TABLE companies (
    company_id SERIAL PRIMARY KEY,
    name VARCHAR(255) NOT NULL,
@@ -12,8 +11,7 @@ CREATE TABLE shops (
   address VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE public.products
-(
+CREATE TABLE public.products (
     product_id serial,
     shop_id integer REFERENCES shops(company_id),
     category character varying(255) NOT NULL,
@@ -36,8 +34,7 @@ CREATE TABLE public.cat_phones (
     PRIMARY KEY (cat_phone_id)
 );
 
-CREATE TABLE public.photos
-(
+CREATE TABLE public.photos (
     photo_id serial,
     filename character varying(255) NOT NULL,
     file_path character varying(255) NOT NULL,
