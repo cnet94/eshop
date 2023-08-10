@@ -1,5 +1,6 @@
-package org.turkovaleksey.eshop.repository.model.photo;
+package org.turkovaleksey.eshop.repository.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "photos")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,7 @@ public class Photo {
     private String filename;
     @Column(name = "file_path")
     private String filePath;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

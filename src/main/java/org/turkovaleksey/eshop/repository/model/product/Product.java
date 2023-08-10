@@ -1,7 +1,8 @@
 package org.turkovaleksey.eshop.repository.model.product;
 
-import lombok.*;
-import org.turkovaleksey.eshop.repository.model.photo.Photo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,5 +31,5 @@ public class Product {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Photo> photos = new ArrayList<>();
+    private List<Photo> photos;
 }

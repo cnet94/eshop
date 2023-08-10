@@ -1,17 +1,19 @@
-package org.turkovaleksey.eshop.service.impl;
+package org.turkovaleksey.eshop.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.turkovaleksey.eshop.repository.api.PhotoRepository;
 import org.turkovaleksey.eshop.repository.api.ProductRepository;
-import org.turkovaleksey.eshop.repository.model.photo.Photo;
+import org.turkovaleksey.eshop.repository.model.product.Photo;
 import org.turkovaleksey.eshop.repository.model.product.Product;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class ServicePhotoImpl {
+@RestController
+@RequestMapping("/api/photos")
+public class PhotoRestController {
 
     private PhotoRepository photoRepository;
 
@@ -20,17 +22,8 @@ public class ServicePhotoImpl {
         this.photoRepository = photoRepository;
     }
 
+    @GetMapping("/")
     public List<Photo> getAll() {
-        return null;
-    }
-
-    public Photo getById(Long id) {
-        return null;
-    }
-
-    public void saveOrUpdate(Photo entity) {
-        photoRepository.save(entity);
-    }
-    public void deleteById(Long id) {
+        return photoRepository.findAll();
     }
 }

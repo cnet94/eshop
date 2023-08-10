@@ -1,4 +1,4 @@
-package org.turkovaleksey.eshop;
+package org.turkovaleksey.eshop.controller;
 
 public class Constants {
 
