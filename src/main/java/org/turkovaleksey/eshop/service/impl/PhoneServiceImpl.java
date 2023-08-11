@@ -11,15 +11,16 @@ import org.turkovaleksey.eshop.service.api._IService;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ServicePhoneImpl implements _IService<Phone, Integer> {
+public class PhoneServiceImpl implements _IService<Phone, Integer> {
 
     private final ProductRepository productRepository;
     private final PhoneRepository phoneRepository;
 
     @Autowired
-    public ServicePhoneImpl(ProductRepository productRepository, PhoneRepository phoneRepository) {
+    public PhoneServiceImpl(ProductRepository productRepository, PhoneRepository phoneRepository) {
         this.productRepository = productRepository;
         this.phoneRepository = phoneRepository;
     }
@@ -39,19 +40,29 @@ public class ServicePhoneImpl implements _IService<Phone, Integer> {
 
     @Override
     public Phone getById(Integer id) {
-        return phoneRepository.getById(id);
+        Optional<Phone> phone = phoneRepository.findById(id);
+        if (phone.isPresent()) {
+            return phone.get();
+        }
+        try {
+            throw new RuntimeException("Phone with id - " + id + " not found");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     @Transactional
-    public void saveOrUpdate(Phone phone) {
+    public String saveOrUpdate(Phone phone) {
         Product prodcut = phone.getProduct();
         productRepository.save(prodcut);
         phoneRepository.save(phone);
+        return null;
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public String deleteById(Integer id) {
         phoneRepository.deleteById(id);
+        return null;
     }
 }
