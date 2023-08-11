@@ -19,15 +19,11 @@
                     <p>Phone</p>
                     <a th:href="@{/catalog/phones/newEntityForm}" class="card-title">Add</a>
                     <a th:href="@{/catalog/phones/quickSave}" class="card-title">Быстрый объект</a>
-                    <form th:action="@{/catalog/phones/upload}" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" accept="image/*" />
-                        <button type="submit">Загрузить</button>
-                    </form>
                 </div>
+                <hr>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

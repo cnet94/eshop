@@ -2,6 +2,7 @@ package org.turkovaleksey.eshop.controller.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,19 +29,11 @@ import static org.turkovaleksey.eshop.controller.Constants.*;
 @Controller
 @RequestMapping("/catalog/phones")
 public class PhonesController implements _IController<Phone, Integer> {
-
-    @Value("${upload.dir}")
-    private String uploadDir;
-
     private PhoneServiceImpl phoneService;
-    private ProductServiceImpl productService;
-    private PhotoServiceImpl photoService;
 
     @Autowired
-    public void setService(PhoneServiceImpl phoneService, ProductServiceImpl productService,PhotoServiceImpl photoService) {
+    public void setService(PhoneServiceImpl phoneService) {
         this.phoneService = phoneService;
-        this.productService = productService;
-        this.photoService = photoService;
     }
 
     @Autowired
@@ -127,30 +120,4 @@ public class PhonesController implements _IController<Phone, Integer> {
         return modelAndView;
     }
 
-    @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
-        Product product = productService.getById(id);
-
-        try {
-            Path uploadPath = Paths.get(uploadDir).toAbsolutePath();
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            // Сохраняем файл в папке загрузки
-            Path filePath = uploadPath.resolve(file.getOriginalFilename());
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            // Создание и сохранение объекта Photo
-            Photo photo = new Photo();
-            photo.setFilename(file.getOriginalFilename());
-            photo.setFilePath(filePath.toString());
-            photo.setProduct(product);
-            photoService.saveOrUpdate(photo);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return "succss";
-    }
 }

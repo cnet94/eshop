@@ -3,6 +3,9 @@ package org.turkovaleksey.eshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.turkovaleksey.eshop.repository.model.product.Photo;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -17,7 +20,8 @@ public class MainController {
 
     @GetMapping("/panel/")
     public ModelAndView panelPage() {
-        return new ModelAndView("panel");
+        ModelAndView modelAndView = new ModelAndView("panel");
+        return modelAndView;
     }
 
     @GetMapping("/test/")
