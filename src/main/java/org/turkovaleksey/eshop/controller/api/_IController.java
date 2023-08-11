@@ -8,7 +8,7 @@ import org.turkovaleksey.eshop.repository.model.product.Product;
 
 public interface _IController<T, K>{
     ModelAndView showAll();
-    ModelAndView showById(@PathVariable K id);
-    String saveOrUpdate(@ModelAttribute T entity);
-    String deleteById(@RequestParam K id);
+    ModelAndView showById(K id);
+    String saveOrUpdate(T entity);
+    String deleteById(K id);
 }
