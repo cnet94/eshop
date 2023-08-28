@@ -70,12 +70,13 @@ public class PhonesController implements _IController<Phone, Integer> {
     @Override
     @PostMapping("/save")
     public String saveOrUpdate(@ModelAttribute("phone") Phone phone) {
-        phoneService.saveOrUpdate(phone);
-        return "redirect:" + PAGE_CATALOG_PHONES;
+            phoneService.saveOrUpdate(phone);
+            return "redirect:" + PAGE_CATALOG_PHONES;
     }
 
     @GetMapping("/quickSave")
-    public String quickSave() {
+    public ModelAndView quickSave() {
+        ModelAndView modelAndView = new ModelAndView("redirect:/panel/");
         Random random = new Random();
         Integer temp = random.nextInt();
         Product product = new Product();
@@ -94,7 +95,7 @@ public class PhonesController implements _IController<Phone, Integer> {
         phone.setSystem("OS");
         phone.setDisplaySize(55);
         phoneService.saveOrUpdate(phone);
-        return "redirect:/catalog/phones/";
+        return modelAndView;
     }
 
     @Override
@@ -115,9 +116,14 @@ public class PhonesController implements _IController<Phone, Integer> {
     @GetMapping("/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Integer id) {
         ModelAndView modelAndView = new ModelAndView(PAGE_PHONES_FORM);
-//        Product currentProduct = serviceProduct.getById(id);
-//        modelAndView.addObject("product", currentProduct);
-        return modelAndView;
+        try {
+            Phone phone = phoneService.getById(id);
+            modelAndView.addObject("phone", phone);
+            return modelAndView;
+        } catch (RuntimeException exception) {
+            modelAndView = new ModelAndView("index");
+            modelAndView.addObject("error", "Ошибка формы");
+            return modelAndView;
+        }
     }
-
 }

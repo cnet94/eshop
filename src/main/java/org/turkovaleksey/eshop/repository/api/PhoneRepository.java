@@ -17,4 +17,6 @@ public interface PhoneRepository extends JpaRepository<Phone, Integer> {
     @Query("SELECT p.id as id, p.brand as brand, p.model as model, p.product as product FROM Phone p")
     List<PhoneWithProductProjection> findAllPhonesWithProductsSelectedFields();
 
+    Integer countAllBy();
+
 }

@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.turkovaleksey.eshop.repository.api.PhoneRepository;
 import org.turkovaleksey.eshop.repository.api.ProductRepository;
+import org.turkovaleksey.eshop.repository.model.categories.phone.InfoPhone;
 import org.turkovaleksey.eshop.repository.model.categories.phone.Phone;
 import org.turkovaleksey.eshop.repository.model.categories.phone.PhoneWithProductProjection;
 import org.turkovaleksey.eshop.repository.model.product.Product;
 import org.turkovaleksey.eshop.service.api._IService;
+import org.turkovaleksey.eshop.service.exceptions.PhoneServiceException;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -54,9 +56,13 @@ public class PhoneServiceImpl implements _IService<Phone, Integer> {
     @Override
     @Transactional
     public String saveOrUpdate(Phone phone) {
-        Product prodcut = phone.getProduct();
-        productRepository.save(prodcut);
-        phoneRepository.save(phone);
+        try {
+            Product prodcut = phone.getProduct();
+            productRepository.save(prodcut);
+            phoneRepository.save(phone);
+        } catch (RuntimeException e) {
+            throw new PhoneServiceException("Error save phone");
+        }
         return null;
     }
 
@@ -64,5 +70,10 @@ public class PhoneServiceImpl implements _IService<Phone, Integer> {
     public String deleteById(Integer id) {
         phoneRepository.deleteById(id);
         return null;
+    }
+
+    public InfoPhone getMinInfo(){
+        Integer count = phoneRepository.countAllBy();
+        return new InfoPhone(count);
     }
 }

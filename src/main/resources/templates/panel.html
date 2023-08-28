@@ -8,23 +8,28 @@
 </head>
 <body>
     <div th:insert="~{fragments/menu :: menu}"></div>
-
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-3 col-lg-2 d-md-block bg-secondary sidebar sidebar-style">
                 <div th:insert="~{fragments/sidebar :: sidebar}"></div>
             </nav>
             <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div>
-                    <p>Phone</p>
-                    <a th:href="@{/catalog/phones/newEntityForm}" class="card-title">Add</a>
-                    <a th:href="@{/catalog/phones/quickSave}" class="card-title">Быстрый объект</a>
+                <div class="alert alert-info" th:if="${mess}">
+                    <p th:text="${mess}"></p>
                 </div>
-                <hr>
+                <!--Категория-->
+                <div th:each="phone : ${phoneInfo}" class="col-md-4">
+                    <h3>Phone</h3>
+                    Количество элементов : <span class="card-text" th:text="${phone.countPhone}"></span>
+                    <br>
+                    <a th:href="@{/catalog/phones/quickSave}" class="card-title">Быстрый объект</a>
+                    <br>
+                    <a th:href="@{/catalog/phones/newEntityForm}" class="card-title">Добавить объект</a>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></p>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
